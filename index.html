@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="desafio">
+<meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <title>Desafio</title>
+
+</head>
+<body ng-controller="Index">
+    <div class="container">
+
+        <h1>Favoritos</h1>
+
+        <hr/>
+
+        <blockquote ng-show="!favoritos.length">Nenhum Post Favoritado</blockquote>
+
+        <div class="row" id="favoritos" ng-show="favoritos.length">
+            <div class="col-md-4" ng-repeat="post in favoritos">
+                <post-detail post="post" favorito="true"></post-detail>
+            </div>
+        </div>
+
+        <h1>Posts</h1>
+        <hr/>
+
+        <input class="form-control" type="text" ng-model="query" placeholder="Search" style="width: 100%">
+
+        <br/>
+        Exibir
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-click="exibir = 10">10</button>
+            <button type="button" class="btn btn-default" ng-click="exibir = 20">20</button>
+            <button type="button" class="btn btn-default" ng-click="exibir = 30">30</button>
+        </div>
+        Posts
+
+        <section style="float: right">
+            <span>Atualização automática:</span>
+            <select ng-model="interval" ng-change="configurarAtualizacaoAutomatica()">
+                <option value="0" selected>Desativado</option>
+                <option value="1000">1 segundo</option>
+                <option value="10000">10 segundos</option>
+                <option value="60000">1 minuto</option>
+                <option value="600000">10 minutos</option>
+                <option value="1800000">30 minutos</option>
+            </select>
+        </section>
+        <hr/>
+
+        <div class="row">
+            <div class="col-md-4" ng-repeat="post in posts | filter:query | limitTo:exibir">
+                <post-detail post="post" favorito="false"></post-detail>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <script src="js/angular.js" type="text/javascript"></script>
+
+    <script type="text/ng-template" id="post-detail.html">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{post.data.title}}</h3>
+            </div>
+            <div class="panel-body">
+                Ups: {{post.data.ups}}<br/>
+                Downs: {{post.data.downs}}<br/>
+                <button class="btn btn-danger" ng-if="favorito" ng-click="desfavoritar()"><i class="glyphicon glyphicon-trash"></i> Desfavoritar</button>
+                <button class="btn btn-default" ng-if="!favorito" ng-click="favoritar()"><i class="glyphicon glyphicon-star-empty"></i> Favoritar</button>
+            </div>
+        </div>
+    </script>
+
+
+</body>
+</html>
