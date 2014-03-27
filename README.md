@@ -6,3 +6,8 @@ Exemplo de uso do AngularJS
  * Filtrar pela descrição;
  * Definir atuliazação automática;
  * Adicionar / Remover favoritos.
+ 
+ [Demo][1]
+
+
+  [1]: http://ddomingues.github.io/angular-favoritar
