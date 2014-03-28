@@ -15,6 +15,7 @@ angular.module("desafio", [])
         $scope.favoritos = [];
         $scope.exibir = 30;
         $scope.interval = 0;
+        $scope.desc = false;
 
         $scope.listAll = function() {
             ReditService.listAll(function(result) {
@@ -63,6 +64,8 @@ angular.module("desafio", [])
                 scope.desfavoritar = function() {
                     trocaLista('favoritos', 'posts', scope.post);
                 }
+
+                $('.panel button').tooltip();
             }
         };
     });;
